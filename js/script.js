@@ -12,30 +12,44 @@ let pokemon, pokemonDets;
 
 /*----- cached element references -----*/
 const $ulEl = $('.collection');
-
+const $imgEl = $('.modal-content img');
+const $name = $('#name');
+const $moves = $('#moves');
+const $abilities = $('#abilities');
+const $height = $('#height');
+const $modal = $('.modal');
 
 
 
 /*----- event listeners -----*/
-$ulEl.on('click', handleClick)
+$ulEl.on('click', 'span', handleClick);
 
 
 
 /*----- functions -----*/
+$modal.modal();
+const instance = M.Modal.getInstance($modal);
+
 function handleClick(event) {
-    console.log(event);
+    getPokemon(event.target.dataset.url, true);
 }
 // make data available as soon as the app loads
 getPokemon();
 
-function getPokemon() {
-    $.ajax(baseURL)
+function getPokemon(detailURL, isDetail) {
+    const url = detailURL || baseURL;
+    $.ajax(url)
         .then(function(data) {
-                pokemon = data.results;
-                render(); // programmatically render the html
+                if (!isDetail) {
+                    pokemon = data.results;
+                    render(); // programmatically render the html
+                } else {
+                    pokemonDets = data;
+
+                };
             },
             function(error) {
-                console.log('error', error);
+                console.log('error:', error);
             });
 }
 
