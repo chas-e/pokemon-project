@@ -1,4 +1,4 @@
-/* font-family: 'Press Start 2P', cursive; */
+    /* font-family: 'Press Start 2P', cursive; */
 
 * {
     box-sizing: border-box;
@@ -21,3 +21,7 @@ main {
     font-family: 'Press Start 2P', cursive;
     margin-left: 5px;
 }
+
+.secondary-content:hover {
+    text-decoration: underline;
+    cursor: pointer;
