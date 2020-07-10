@@ -45,6 +45,7 @@ function getPokemon(detailURL, isDetail) {
                     render(); // programmatically render the html
                 } else {
                     pokemonDets = data;
+                    render(true);
 
                 };
             },
@@ -61,7 +62,20 @@ function generateHTML() {
     });
 }
 
-function render() {
-    const html = generateHTML().join('');
-    $ulEl.html(html);
+function render(isDetail) {
+    if (!isDetail) {
+        const html = generateHTML().join('');
+        $ulEl.html(html);
+
+    } else {
+        //  produce the modal
+        $imgEl.attr('src', pokemonDets.sprites.front_default);
+        $imgEl.attr('alt', pokemonDets.name);
+        $name.text(pokemonDets.name);
+        $height.text('Height: ' + pokemonDets.height);
+        $moves.text('Number of moves: ' + pokemonDets.moves.length);
+        $abilities.text('Number of abilities: ' + pokemonDets.abilities.length);
+        // open the modal
+        instance.open();
+    }
 }
